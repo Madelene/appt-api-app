@@ -3,27 +3,33 @@ class AppointmentsController < ApplicationController
 
   def index
       appointments = Appointment.all #issues query to database
-      render json: appointments, status: 200
-  end
 
-  def create
-    if start_time = params[:start_time]
+      if start_time = params[:start_time]
       appointments = appointments.where(start_time: start_time) #adding filters, dynamically, with "where" method
-    end
+      end
 
-    if end_time = params[:end_time]
+      if end_time = params[:end_time]
       appointments = appointments.where(end_time: end_time)
+      end
+      render json: appointments, status: 200 #fetching all of the appointments and returning them as json
+  end
+
+    def create
+      appointment = Appointment.new(appointment_params)
+
+      if appointment.save
+        render json: appointment, status: :created, location: appointment #used created symbol instead of 201, just for fun.
+      else
+        render json: appointment.errors, status: :unprocessable_entity #same as 422
+      end
     end
 
-    render json: appointments, status: 200 #fetching all of the appointments and returning them as json
-end
+    private
+    def appointment_params
+      params.require(:appointment).permit(:first_name, :last_name, :start_time, :end_time, :comments,)
+    end
 
-  private
-  def appointment_params
-    params.require(:appointment).permit(:first_name, :last_name, :start_time, :end_time, :comments,)
-  end
-
-  def set_appt
-    @appointment = Appointment.find(params[:id])
-  end
+    def set_appt
+      @appointment = Appointment.find(params[:id])
+    end
 end
