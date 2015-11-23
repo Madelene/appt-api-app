@@ -1,6 +1,26 @@
 class AppointmentsController < ApplicationController
+  before_action :set_appt, only: [:update, :destroy]
+
   def index
-    appointments = Appointment.all
+    appointments = Appointment.all #issues query to database
+
+    if start_time = params[:start_time]
+      appointments = appointments.where(start_time: start_time) #adding filters, dynamically, with "where" method
+    end
+
+    if end_time = params[:end_time]
+      appointments = appointments.where(end_time: end_time)
+    end
+
     render json: appointments, status: 200 #fetching all of the appointments and returning them as json
+  end
+
+  private
+  def appointment_params
+    params.require(:appointment).permit(:first_name, :last_name, :start_time, :end_time, :comments,)
+  end
+
+  def set_appt
+    @appointment = Appointment.find(params[:id])
   end
 end
