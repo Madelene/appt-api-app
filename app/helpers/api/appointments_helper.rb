@@ -1,0 +1,2 @@
+module API::AppointmentsHelper
+end
