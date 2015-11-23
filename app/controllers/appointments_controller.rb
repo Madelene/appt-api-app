@@ -4,6 +4,10 @@ class AppointmentsController < ApplicationController
   def index
     appointments = Appointment.all #issues query to database
 
+    respond_to do |format| # allows us to control different types of formats app will respond to
+      format.json { render json: zombies, status: 200 }
+    end
+
     if start_time = params[:start_time]
       appointments = appointments.where(start_time: start_time) #adding filters, dynamically, with "where" method
     end
