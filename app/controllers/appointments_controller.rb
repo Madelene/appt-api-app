@@ -33,7 +33,7 @@ class AppointmentsController < ApplicationController
     end
 
     def destroy
-      @appointment.destroy
+      @appointment.destroy #removes the record from the database
        head 204
     end
 
