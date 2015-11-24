@@ -32,6 +32,11 @@ class AppointmentsController < ApplicationController
       end
     end
 
+    def destroy
+      @appointment.destroy
+       head 204
+    end
+
     private
     def appointment_params
       params.require(:appointment).permit(:first_name, :last_name, :start_time, :end_time, :comments,)
