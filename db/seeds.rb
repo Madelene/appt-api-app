@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 class DateConverter
   def self.convert(value)
-    DateTime.strptime( value, '%m/%e/%y %k:%M') # parses custom date format into Date instance
+    DateTime.strptime( value, '%m/%e/%y %k:%M') # parses custom date format into Date/Time instance
   end
 end
 
