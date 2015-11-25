@@ -18,7 +18,7 @@ class CreatingApptsTest < ActionDispatch::IntegrationTest
     }.to_json,
     { 'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s }
     assert_equal 422, response.status # 422 == error occurred and client is to blame
-  end
+    end
 
   test 'does not create appointment with last name nil' do
     post '/appointments',
@@ -27,25 +27,25 @@ class CreatingApptsTest < ActionDispatch::IntegrationTest
     }.to_json,
     { 'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s }
     assert_equal 422, response.status
-  end
-
+    end
 
 # When creating an appt, it is only valid if the start and end times are in the future
-  # test 'no start dates in the past' do
-  #   post '/appointments',
-  #   { appointment:
-  #     { first_name: 'Maddie', last_name: 'Campos', start_time: '11-23-2015T18:00:00.000Z', end_time: '11-23-2015T19:00:00.000Z' }
-  #   }.to_json,
-  #   { 'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s }
-  #   assert_equal 422, response.status #Unprocessable entity (well-formed request from client, but semantically invalid)
-  #   end
+  test 'no start dates in the past' do
+    post '/appointments',
+    { appointment:
+      { first_name: 'Maddie', last_name: 'Campos', start_time: '11-23-2015T18:00:00.000Z', end_time: '11-23-2015T19:00:00.000Z' }
+    }.to_json,
+    { 'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s }
+    assert_equal 422, response.status #Unprocessable entity (well-formed request from client, but semantically invalid)
+    end
 
-  # test 'no end dates in the past' do
-  #   post '/appointments',
-  #   { appointment:
-  #     { first_name: 'Maddie', last_name: 'Campos', start_time: '11-23-2015T18:00:00.000Z', end_time: '11-23-2015T19:00:00.000Z' }
-  #   }.to_json,
-  #   { 'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s }
-  #   assert_equal 422, response.status
+  test 'no end dates in the past' do
+    post '/appointments',
+    { appointment:
+      { first_name: 'Maddie', last_name: 'Campos', start_time: '11-23-2015T18:00:00.000Z', end_time: '11-23-2015T19:00:00.000Z' }
+    }.to_json,
+    { 'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s }
+    assert_equal 422, response.status
+    end
 end
 

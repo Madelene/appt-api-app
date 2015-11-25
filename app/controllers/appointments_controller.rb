@@ -1,6 +1,7 @@
 class AppointmentsController < ApplicationController
   before_action :set_appt, only: [:update, :destroy]
 
+# GET
   def index
       appointments = Appointment.all #issues query to database
 
@@ -14,16 +15,22 @@ class AppointmentsController < ApplicationController
       render json: appointments, status: 200 #fetching all of the appointments and returning them as json
   end
 
+# POST
     def create
       appointment = Appointment.new(appointment_params)
 
-      if appointment.save
-        render json: appointment, status: :created, location: appointment #used created symbol instead of 201, just for fun.
-      else
+      if appointment.valid
+        if appointment.save
+        render nothing: :true, status: 204, location: appointment #204 == no content
+        else
         render json: appointment.errors, status: :unprocessable_entity #same as 422
+        end
+      else
+      render json: appointment.errors, status: 422
       end
     end
 
+# PUT/PATCH
     def update
       if @appointment.update(appointment_params)
         render json: @appointment, status: 200
@@ -32,9 +39,10 @@ class AppointmentsController < ApplicationController
       end
     end
 
+# DELETE
     def destroy
       @appointment.destroy #removes the record from the database
-       head 204
+      head 204
     end
 
     private

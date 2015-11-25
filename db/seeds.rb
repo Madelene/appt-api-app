@@ -7,9 +7,15 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 class DateConverter
   def self.convert(value)
-    Date.strptime( value, '%m/%e/%y %k:%M') # parses custom date format into Date instance
+    DateTime.strptime( value, '%m/%e/%y %k:%M') # parses custom date format into Date instance
   end
 end
+
+# class ActiveSupport::TimeWithZone
+#     def as_json(options = {})
+#         strftime('%Y-%m-%d %H:%M:%S')
+#     end
+# end
 
 filename = 'db/appt_data.csv'
 options = {
@@ -17,8 +23,8 @@ options = {
   :value_converters => {:start_time => DateConverter, :end_time => DateConverter}
 }
 
-n = SmarterCSV.process(filename, options) do |array|
+  n = SmarterCSV.process(filename, options) do |array|
       # we're passing a block in, to process each resulting hash / =row (the block takes array of hashes)
       # when chunking is not enabled, there is only one hash in each array
       Appointment.create( array.first )
-end
+  end
