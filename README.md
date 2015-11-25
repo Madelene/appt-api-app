@@ -7,8 +7,8 @@ I used test-driven development (TDD) to create this API, testing all 4 methods t
 
 * GET request (Read): Returns a list of all of the appointments, in JSON.
  - GET == https://vast-woodland-4805.herokuapp.com
- - Successfully filters out by start_time and end_time 
-   for example: https://vast-woodland-4805.herokuapp.com/?start_time=2013-11-01T07:00 filters out the appointment       that starts at 7AM.
+ - Successfully filters out by start_time and end_time. 
+   For example: https://vast-woodland-4805.herokuapp.com/?start_time=2013-11-01T07:00 filters out the appointment       that starts at 7AM.
  
 * POST request (Create): Able to create an appointment, but first and last name need to be present, and start/end times must be in the future.
  
