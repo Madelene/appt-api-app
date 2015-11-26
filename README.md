@@ -15,6 +15,7 @@ I used test-driven development (TDD) to create this API, testing all 4 methods t
 * PUT/PATCH request (Update): After updating an entry, the data is reloaded from the database (.reload method) and populated with the latest update.
 
 * DELETE (Destroy): Tests the ability to delete an existing appointment.
+ - curl -i -X DELETE https://vast-woodland-4805.herokuapp.com/appointments/1 successfully deletes the appointment with ID 1, returning a 204 (No Content) status code.
 
 
 
