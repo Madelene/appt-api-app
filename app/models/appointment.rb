@@ -8,7 +8,7 @@ class Appointment < ActiveRecord::Base
     if self.start_time.nil? || self.end_time.nil?
       check = false
       #converts a string to a DateTime value
-    elsif self.start_time.to_datetime > Time.now && self.end_time.to_datetime > Time.now
+    elsif self.start_time.to_datetime > Time.now && self.end_time.to_datetime > self.start_time.to_datetime #this ensures that the end_time is not earlier than the start_time
       appointments = Appointment.all
       check = true
 
