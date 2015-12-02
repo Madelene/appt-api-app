@@ -48,7 +48,7 @@ I used test-driven development (TDD) to create this API, testing all 4 methods t
  - curl -i -X DELETE https://vast-woodland-4805.herokuapp.com/appointments/1 successfully deletes the appointment with ID 1, returning a 204 (No Content) status code.
 
 
-
+The [smarter_csv](https://github.com/tilo/smarter_csv) gem was implemented in order to help populate the database with the csv file.
 
 
 
